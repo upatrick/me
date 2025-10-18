@@ -1,0 +1,149 @@
+{
+  "header": {
+    "nav": {
+      "home": "Home",
+      "about": "About",
+      "experience": "Experience",
+      "projects": "Projects",
+      "skills": "Skills",
+      "contact": "Contact"
+    },
+    "mobileFooter": "Browse the portfolio and discover my work"
+  },
+  "hero": {
+    "badge": "Available for new projects",
+    "title": {
+      "line1": "Designer &",
+      "line2": "Developer",
+      "line3": "Fullstack"
+    },
+    "description": "I build modern, fast, and accessible interfaces. Focused on React, TypeScript, and elegant experiences that make a difference.",
+    "buttons": {
+      "viewProjects": "View Projects",
+      "contact": "Get in Touch"
+    },
+    "stats": {
+      "projects": "Projects",
+      "experience": "Years Exp.",
+      "satisfaction": "Satisfaction"
+    },
+    "profile": {
+      "name": "Patrick Dutra",
+      "title": "Fullstack Developer",
+      "buttons": {
+        "cv": "CV",
+        "email": "Email"
+      }
+    }
+  },
+  "about": {
+    "badge": "About Me",
+    "title": "Fullstack Developer",
+    "subtitle": "Transforming complex ideas into simple and elegant digital experiences.",
+    "greeting": "Hello! I'm Patrick",
+    "description1": "Fullstack developer with over 3 years of experience creating modern and accessible interfaces. Specialized in React, TypeScript, design systems, Node.js, Express, Docker, and databases, I transform complex ideas into simple and elegant digital experiences.",
+    "description2": "My passion lies in combining cutting-edge technology with user-centered design, always seeking perfection in every detail. When I'm not coding, you'll find me exploring new technologies or contributing to open source projects.",
+    "buttons": {
+      "contact": "Let's Talk",
+      "projects": "View Projects"
+    },
+    "stats": {
+      "projects": "Projects",
+      "years": "Years",
+      "dedication": "Dedication"
+    },
+    "highlights": {
+      "cleanCode": {
+        "title": "Clean Code",
+        "description": "I write readable, well-structured, and maintainable code following best practices"
+      },
+      "performance": {
+        "title": "Performance",
+        "description": "Optimization for fast loading and smooth experience across all devices"
+      },
+      "uxui": {
+        "title": "UX/UI Design",
+        "description": "Intuitive and accessible interfaces that delight users and solve real problems"
+      },
+      "quality": {
+        "title": "Quality",
+        "description": "Commitment to high standards, rigorous testing, and consistent deliveries"
+      }
+    }
+  },
+  "contact": {
+    "badge": "Let's Talk",
+    "title": "Get in Touch",
+    "subtitle": "I'm always interested in new projects and collaboration opportunities. Let's discuss how I can help turn your ideas into reality.",
+    "quickStats": {
+      "response": "Quick Response",
+      "availability": "Availability",
+      "projects": "Projects"
+    },
+    "info": {
+      "title": "Contact Information",
+      "description": "Choose your preferred contact method. I'm always available to discuss new projects and collaboration opportunities.",
+      "email": {
+        "label": "Email",
+        "value": "your.email@example.com",
+        "description": "Response within 24h"
+      },
+      "phone": {
+        "label": "Phone",
+        "value": "+55 (12) 981706484",
+        "description": "WhatsApp available"
+      },
+      "location": {
+        "label": "Location",
+        "value": "São Paulo, Brazil",
+        "description": "Available for remote projects"
+      }
+    },
+    "social": {
+      "title": "Social Media"
+    },
+    "form": {
+      "title": "Send a Message",
+      "description": "Fill out the form below and I'll get back to you as soon as possible.",
+      "name": "Full Name",
+      "email": "Email",
+      "subject": "Subject",
+      "message": "Message",
+      "placeholders": {
+        "name": "Enter your name",
+        "email": "your.email@example.com",
+        "subject": "What would you like to talk about?",
+        "message": "Tell me more about your project or idea..."
+      },
+      "button": {
+        "send": "Send Message",
+        "sending": "Sending Message..."
+      },
+      "success": "Message sent successfully! I'll get back to you within 24 hours.",
+      "errors": {
+        "nameMin": "Name must be at least 2 characters",
+        "emailInvalid": "Invalid email",
+        "subjectMin": "Subject must be at least 5 characters",
+        "messageMin": "Message must be at least 10 characters"
+      }
+    }
+  },
+  "theme": {
+    "toggle": "Toggle theme",
+    "switchTo": "Switch to {{mode}} mode"
+  },
+  "language": {
+    "toggle": "Toggle language",
+    "switchTo": "Switch to {{language}}"
+  },
+  "projects": {
+    "title": {
+      "line1": "Projects",
+      "line2": "in Progress"
+    },
+    "subtitle": "Something amazing is being prepared. New innovative projects are under development to surprise and delight.",
+    "status": "In Development",
+    "progress": "Progress",
+    "cta": "Stay tuned for upcoming updates!"
+  }
+}

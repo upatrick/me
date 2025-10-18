@@ -1,0 +1,149 @@
+{
+  "header": {
+    "nav": {
+      "home": "Início",
+      "about": "Sobre",
+      "experience": "Experiência",
+      "projects": "Projetos",
+      "skills": "Skills",
+      "contact": "Contato"
+    },
+    "mobileFooter": "Navegue pelo portfólio e conheça meus trabalhos"
+  },
+  "hero": {
+    "badge": "Disponível para novos projetos",
+    "title": {
+      "line1": "Designer &",
+      "line2": "Desenvolvedor",
+      "line3": "Fullstack"
+    },
+    "description": "Eu construo interfaces modernas, rápidas e acessíveis. Foco em React, TypeScript e experiências elegantes que fazem a diferença.",
+    "buttons": {
+      "viewProjects": "Ver Projetos",
+      "contact": "Entre em Contato"
+    },
+    "stats": {
+      "projects": "Projetos",
+      "experience": "Anos Exp.",
+      "satisfaction": "Satisfação"
+    },
+    "profile": {
+      "name": "Patrick Dutra",
+      "title": "Fullstack Developer",
+      "buttons": {
+        "cv": "CV",
+        "email": "Email"
+      }
+    }
+  },
+  "about": {
+    "badge": "Sobre Mim",
+    "title": "Desenvolvedor Fullstack",
+    "subtitle": "Transformando ideias complexas em experiências digitais simples e elegantes.",
+    "greeting": "Olá! Sou o Patrick",
+    "description1": "Desenvolvedor fullstack com mais de 3 anos de experiência criando interfaces modernas e acessíveis. Especializado em React, TypeScript, design systems, Node.js, Express, Docker e bancos de dados., transformo ideias complexas em experiências digitais simples e elegantes.",
+    "description2": "Minha paixão está em combinar tecnologia de ponta com design centrado no usuário, sempre buscando a perfeição em cada detalhe. Quando não estou codando, você me encontra explorando novas tecnologias ou contribuindo para projetos open source.",
+    "buttons": {
+      "contact": "Vamos Conversar",
+      "projects": "Ver Projetos"
+    },
+    "stats": {
+      "projects": "Projetos",
+      "years": "Anos",
+      "dedication": "Dedicação"
+    },
+    "highlights": {
+      "cleanCode": {
+        "title": "Código Limpo",
+        "description": "Escrevo código legível, bem estruturado e fácil de manter seguindo as melhores práticas"
+      },
+      "performance": {
+        "title": "Performance",
+        "description": "Otimização para carregamento rápido e experiência fluida em todos os dispositivos"
+      },
+      "uxui": {
+        "title": "UX/UI Design",
+        "description": "Interfaces intuitivas e acessíveis que encantam usuários e resolvem problemas reais"
+      },
+      "quality": {
+        "title": "Qualidade",
+        "description": "Compromisso com padrões elevados, testes rigorosos e entregas consistentes"
+      }
+    }
+  },
+  "contact": {
+    "badge": "Vamos Conversar",
+    "title": "Entre em Contato",
+    "subtitle": "Estou sempre interessado em novos projetos e oportunidades de colaboração. Vamos discutir como posso ajudar a transformar suas ideias em realidade.",
+    "quickStats": {
+      "response": "Resposta Rápida",
+      "availability": "Disponibilidade",
+      "projects": "Projetos"
+    },
+    "info": {
+      "title": "Informações de Contato",
+      "description": "Escolha a forma de contato que preferir. Estou sempre disponível para discutir novos projetos e oportunidades de colaboração.",
+      "email": {
+        "label": "Email",
+        "value": "patrickdutra100@hotmail.com",
+        "description": "Resposta em até 24h"
+      },
+      "phone": {
+        "label": "Telefone",
+        "value": "+55 (12) 981706484",
+        "description": "WhatsApp disponível"
+      },
+      "location": {
+        "label": "Localização",
+        "value": "São Jose dos Campos, SP",
+        "description": "Disponível para projetos remotos"
+      }
+    },
+    "social": {
+      "title": "Redes Sociais"
+    },
+    "form": {
+      "title": "Envie uma Mensagem",
+      "description": "Preencha o formulário abaixo e retornarei o contato o mais breve possível.",
+      "name": "Nome Completo",
+      "email": "Email",
+      "subject": "Assunto",
+      "message": "Mensagem",
+      "placeholders": {
+        "name": "Digite seu nome",
+        "email": "seu.email@exemplo.com",
+        "subject": "Sobre o que você gostaria de conversar?",
+        "message": "Conte-me mais sobre seu projeto ou ideia..."
+      },
+      "button": {
+        "send": "Enviar Mensagem",
+        "sending": "Enviando Mensagem..."
+      },
+      "success": "Mensagem enviada com sucesso! Entrarei em contato em até 24 horas.",
+      "errors": {
+        "nameMin": "Nome deve ter pelo menos 2 caracteres",
+        "emailInvalid": "Email inválido",
+        "subjectMin": "Assunto deve ter pelo menos 5 caracteres",
+        "messageMin": "Mensagem deve ter pelo menos 10 caracteres"
+      }
+    }
+  },
+  "theme": {
+    "toggle": "Alternar tema",
+    "switchTo": "Mudar para modo {{mode}}"
+  },
+  "language": {
+    "toggle": "Alternar idioma",
+    "switchTo": "Mudar para {{language}}"
+  },
+  "projects": {
+    "title": {
+      "line1": "Projetos",
+      "line2": "em Andamento"
+    },
+    "subtitle": "Algo incrível está sendo preparado. Novos projetos inovadores estão em desenvolvimento para surpreender e encantar.",
+    "status": "Em Desenvolvimento",
+    "progress": "Progresso",
+    "cta": "Fique ligado para as próximas atualizações!"
+  }
+}
