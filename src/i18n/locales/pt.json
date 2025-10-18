@@ -115,6 +115,7 @@
         "subject": "Sobre o que você gostaria de conversar?",
         "message": "Conte-me mais sobre seu projeto ou ideia..."
       },
+      "contactNote": "*deixe seu contato na mensagem*",
       "button": {
         "send": "Enviar Mensagem",
         "sending": "Enviando Mensagem..."

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo, useCallback } from "react";
 import { motion } from "framer-motion";
 import {
   Github,
@@ -87,10 +87,10 @@ const stats = [
   { icon: Zap, label: "Commits", value: "1000+" },
 ];
 
-export default function Footer() {
-  const scrollToTop = () => {
+const Footer = memo(function Footer() {
+  const scrollToTop = useCallback(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
-  };
+  }, []);
 
   return (
     <footer className="relative bg-gradient-to-br from-background via-muted/10 to-background border-t border-border/50 overflow-hidden">
@@ -282,4 +282,6 @@ export default function Footer() {
       </div>
     </footer>
   );
-}
+});
+
+export default Footer;

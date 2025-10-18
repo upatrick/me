@@ -65,7 +65,7 @@ export default function Hero() {
 
         {/* Floating Particles */}
         {useMemo(() => {
-          const particleCount = isMobile ? 15 : 30;
+          const particleCount = isMobile ? 5 : 10;
           return [...Array(particleCount)].map((_, i) => {
             const size = Math.random() * 3 + 1; // Random size between 1-4px
             const colors = [

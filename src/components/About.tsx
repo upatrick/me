@@ -69,7 +69,7 @@ export default function About() {
         <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-purple-500/3 to-blue-500/5 blur-3xl" />
 
         {/* Floating Particles */}
-        {[...Array(20)].map((_, i) => (
+        {[...Array(10)].map((_, i) => (
           <motion.div
             key={i}
             className="absolute w-1 h-1 bg-primary/30 rounded-full"

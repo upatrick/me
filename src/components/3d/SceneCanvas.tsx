@@ -18,16 +18,21 @@ export default function SceneCanvas({ className }: SceneCanvasProps) {
     );
   }, []);
 
+  // Disable 3D scene entirely on mobile for better performance
+  if (isMobile) {
+    return <div className={className}></div>;
+  }
+
   return (
     <div className={className}>
       <Canvas
-        shadows={!isMobile}
+        shadows={false}
         gl={{
-          antialias: !isMobile,
+          antialias: false,
           alpha: true,
           powerPreference: "high-performance",
         }}
-        dpr={isMobile ? 1 : [1, 2]}
+        dpr={1}
       >
         <Suspense fallback={null}>
           {/* Camera */}
@@ -45,7 +50,7 @@ export default function SceneCanvas({ className }: SceneCanvasProps) {
             enablePan={false}
             enableZoom={false}
             enableRotate={true}
-            autoRotate={!isMobile}
+            autoRotate={false}
             autoRotateSpeed={0.5}
             maxPolarAngle={Math.PI / 2}
             minPolarAngle={Math.PI / 2}

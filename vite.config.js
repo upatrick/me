@@ -27,6 +27,12 @@ export default defineConfig({
           vendor: ["react", "react-dom"],
           ui: ["framer-motion", "lucide-react"],
           i18n: ["i18next", "react-i18next"],
+          // Separate chunk for Three.js and related libraries
+          'three-vendor': ['@react-three/fiber', '@react-three/drei', 'three'],
+          // Separate chunk for animation libraries
+          'animation-vendor': ['@react-spring/web', '@react-spring/three'],
+          // Separate chunk for UI libraries
+          'ui-vendor': ['@radix-ui/react-dialog', '@radix-ui/react-label', '@radix-ui/react-slot'],
         },
       },
     },

@@ -115,6 +115,7 @@
         "subject": "What would you like to talk about?",
         "message": "Tell me more about your project or idea..."
       },
+      "contactNote": "*leave your contact in the message*",
       "button": {
         "send": "Send Message",
         "sending": "Sending Message..."

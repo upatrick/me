@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo, useCallback } from "react";
 import { motion } from "framer-motion";
 import {
   Code2,
@@ -100,7 +100,7 @@ const achievements = [
   { icon: Target, title: "Clientes Satisfeitos", value: "100%", color: "text-green-500" },
 ];
 
-export default function Skills() {
+const Skills = memo(function Skills() {
   return (
     <section
       id="skills"
@@ -276,4 +276,6 @@ export default function Skills() {
       </div>
     </section>
   );
-}
+});
+
+export default Skills;

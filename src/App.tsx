@@ -11,6 +11,12 @@ import ErrorFallback from "./components/ErrorFallback";
 // Lazy load pages for code splitting
 const Home = lazy(() => import("./pages/Home"));
 
+// Lazy load heavy 3D components
+const SceneCanvas = lazy(() => import("./components/3d/SceneCanvas"));
+const FloatingParticles = lazy(() => import("./components/3d/FloatingParticles"));
+const Hero3DObject = lazy(() => import("./components/3d/Hero3DObject"));
+const LightingRig = lazy(() => import("./components/3d/LightingRig"));
+
 export default function App() {
   return (
     <ErrorBoundary FallbackComponent={ErrorFallback}>

@@ -364,6 +364,9 @@ export default function Contact() {
                           : "focus:border-primary"
                       }`}
                     />
+                    <p className="text-xs text-muted-foreground italic">
+                      {t("contact.form.contactNote")}
+                    </p>
                     {errors.message && (
                       <p className="text-xs text-destructive flex items-center gap-1">
                         <span className="w-1 h-1 bg-destructive rounded-full"></span>

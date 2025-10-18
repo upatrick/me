@@ -13,7 +13,7 @@ export default function FloatingParticles() {
     );
   }, []);
 
-  const particlesCount = isMobile ? 500 : 1000;
+  const particlesCount = isMobile ? 100 : 500;
 
   const positions = useMemo(() => {
     const positions = new Float32Array(particlesCount * 3);
