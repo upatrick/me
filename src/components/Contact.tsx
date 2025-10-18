@@ -106,6 +106,7 @@ export default function Contact() {
       const templateParams = {
         from_name: data.name,
         from_email: data.email,
+        reply_to: data.email,
         subject: data.subject,
         message: data.message,
         to_name: "Patrick Dutra",
