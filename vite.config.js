@@ -13,4 +13,22 @@ export default defineConfig({
   define: {
     global: "globalThis",
   },
+  build: {
+    minify: "terser",
+    terserOptions: {
+      compress: {
+        drop_console: true,
+        drop_debugger: true,
+      },
+    },
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          vendor: ["react", "react-dom"],
+          ui: ["framer-motion", "lucide-react"],
+          i18n: ["i18next", "react-i18next"],
+        },
+      },
+    },
+  },
 });

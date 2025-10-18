@@ -5,7 +5,15 @@ import { Points, PointMaterial } from "@react-three/drei";
 export default function FloatingParticles() {
   const ref = useRef<any>(null);
 
-  const particlesCount = 1000;
+  const isMobile = useMemo(() => {
+    return (
+      /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+        navigator.userAgent
+      ) || window.innerWidth < 768
+    );
+  }, []);
+
+  const particlesCount = isMobile ? 500 : 1000;
 
   const positions = useMemo(() => {
     const positions = new Float32Array(particlesCount * 3);
@@ -17,7 +25,7 @@ export default function FloatingParticles() {
     }
 
     return positions;
-  }, []);
+  }, [particlesCount]);
 
   useFrame((state) => {
     if (ref.current) {

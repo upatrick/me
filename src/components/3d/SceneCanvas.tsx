@@ -1,6 +1,6 @@
 import { Canvas } from "@react-three/fiber";
 import { OrbitControls, PerspectiveCamera } from "@react-three/drei";
-import { Suspense } from "react";
+import { Suspense, useMemo } from "react";
 import FloatingParticles from "./FloatingParticles";
 import Hero3DObject from "./Hero3DObject";
 import LightingRig from "./LightingRig";
@@ -10,16 +10,24 @@ interface SceneCanvasProps {
 }
 
 export default function SceneCanvas({ className }: SceneCanvasProps) {
+  const isMobile = useMemo(() => {
+    return (
+      /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+        navigator.userAgent
+      ) || window.innerWidth < 768
+    );
+  }, []);
+
   return (
     <div className={className}>
       <Canvas
-        shadows
+        shadows={!isMobile}
         gl={{
-          antialias: true,
+          antialias: !isMobile,
           alpha: true,
           powerPreference: "high-performance",
         }}
-        dpr={[1, 2]}
+        dpr={isMobile ? 1 : [1, 2]}
       >
         <Suspense fallback={null}>
           {/* Camera */}
@@ -37,7 +45,7 @@ export default function SceneCanvas({ className }: SceneCanvasProps) {
             enablePan={false}
             enableZoom={false}
             enableRotate={true}
-            autoRotate
+            autoRotate={!isMobile}
             autoRotateSpeed={0.5}
             maxPolarAngle={Math.PI / 2}
             minPolarAngle={Math.PI / 2}

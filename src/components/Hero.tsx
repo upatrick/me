@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo, useCallback } from "react";
 import { motion } from "framer-motion";
 import {
   ArrowDown,
@@ -19,21 +19,34 @@ import SceneCanvas from "./3d/SceneCanvas";
 
 export default function Hero() {
   const { t } = useTranslation();
-  const scrollToNext = () => {
+
+  const isMobile = useMemo(() => {
+    return (
+      /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+        navigator.userAgent
+      ) || window.innerWidth < 768
+    );
+  }, []);
+
+  const prefersReducedMotion = useMemo(() => {
+    return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  }, []);
+
+  const scrollToNext = useCallback(() => {
     const aboutSection = document.getElementById("about");
     if (aboutSection) {
       aboutSection.scrollIntoView({ behavior: "smooth" });
     }
-  };
+  }, []);
 
-  const handleDownloadCV = () => {
+  const handleDownloadCV = useCallback(() => {
     const link = document.createElement("a");
     link.href = "/cv.pdf";
     link.download = "Patrick_Dutra_CV.pdf";
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
-  };
+  }, []);
 
   return (
     <section
@@ -51,94 +64,105 @@ export default function Hero() {
         <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-purple-500/5 to-blue-500/10 blur-3xl" />
 
         {/* Floating Particles */}
-        {[...Array(30)].map((_, i) => {
-          const size = Math.random() * 3 + 1; // Random size between 1-4px
-          const colors = [
-            "bg-primary/40",
-            "bg-purple-500/40",
-            "bg-blue-500/40",
-            "bg-pink-500/40",
-            "bg-yellow-500/40",
-            "bg-green-500/40",
-          ];
-          const color = colors[Math.floor(Math.random() * colors.length)];
-          const duration = 3 + Math.random() * 4; // 3-7 seconds
-          const delay = Math.random() * 5; // 0-5 seconds delay
-          const moveX = (Math.random() - 0.5) * 100; // -50 to +50
-          const moveY = (Math.random() - 0.5) * 60; // -30 to +30
+        {useMemo(() => {
+          const particleCount = isMobile ? 15 : 30;
+          return [...Array(particleCount)].map((_, i) => {
+            const size = Math.random() * 3 + 1; // Random size between 1-4px
+            const colors = [
+              "bg-primary/40",
+              "bg-purple-500/40",
+              "bg-blue-500/40",
+              "bg-pink-500/40",
+              "bg-yellow-500/40",
+              "bg-green-500/40",
+            ];
+            const color = colors[Math.floor(Math.random() * colors.length)];
+            const duration = prefersReducedMotion ? 0 : 3 + Math.random() * 4; // 3-7 seconds
+            const delay = Math.random() * 5; // 0-5 seconds delay
+            const moveX = (Math.random() - 0.5) * 100; // -50 to +50
+            const moveY = (Math.random() - 0.5) * 60; // -30 to +30
 
-          return (
+            return (
+              <motion.div
+                key={i}
+                className={`absolute ${color} rounded-full`}
+                style={{
+                  width: `${size}px`,
+                  height: `${size}px`,
+                  left: `${Math.random() * 100}%`,
+                  top: `${Math.random() * 100}%`,
+                }}
+                initial={{
+                  x: 0,
+                  y: 0,
+                  opacity: 0,
+                  scale: 0.5,
+                }}
+                animate={
+                  prefersReducedMotion
+                    ? {}
+                    : {
+                        x: [0, moveX, -moveX, 0],
+                        y: [0, moveY, -moveY, 0],
+                        opacity: [0, 0.8, 0.4, 0],
+                        scale: [0.5, 1, 0.8, 0.5],
+                        rotate: [0, 180, 360],
+                      }
+                }
+                transition={{
+                  duration: duration,
+                  repeat: Infinity,
+                  delay: delay,
+                  ease: "easeInOut",
+                }}
+              />
+            );
+          });
+        }, [isMobile, prefersReducedMotion])}
+
+        {/* Neon Glow Effects */}
+        {!prefersReducedMotion && (
+          <>
             <motion.div
-              key={i}
-              className={`absolute ${color} rounded-full`}
-              style={{
-                width: `${size}px`,
-                height: `${size}px`,
-                left: `${Math.random() * 100}%`,
-                top: `${Math.random() * 100}%`,
-              }}
-              initial={{
-                x: 0,
-                y: 0,
-                opacity: 0,
-                scale: 0.5,
-              }}
+              className="absolute top-1/4 left-1/4 w-40 h-40 bg-primary/20 rounded-full blur-2xl"
               animate={{
-                x: [0, moveX, -moveX, 0],
-                y: [0, moveY, -moveY, 0],
-                opacity: [0, 0.8, 0.4, 0],
-                scale: [0.5, 1, 0.8, 0.5],
-                rotate: [0, 180, 360],
+                scale: [1, 1.3, 1],
+                opacity: [0.3, 0.7, 0.3],
               }}
               transition={{
-                duration: duration,
+                duration: 5,
                 repeat: Infinity,
-                delay: delay,
                 ease: "easeInOut",
               }}
             />
-          );
-        })}
-
-        {/* Neon Glow Effects */}
-        <motion.div
-          className="absolute top-1/4 left-1/4 w-40 h-40 bg-primary/20 rounded-full blur-2xl"
-          animate={{
-            scale: [1, 1.3, 1],
-            opacity: [0.3, 0.7, 0.3],
-          }}
-          transition={{
-            duration: 5,
-            repeat: Infinity,
-            ease: "easeInOut",
-          }}
-        />
-        <motion.div
-          className="absolute bottom-1/4 right-1/4 w-32 h-32 bg-purple-500/20 rounded-full blur-2xl"
-          animate={{
-            scale: [1.3, 1, 1.3],
-            opacity: [0.4, 0.8, 0.4],
-          }}
-          transition={{
-            duration: 4,
-            repeat: Infinity,
-            ease: "easeInOut",
-            delay: 1,
-          }}
-        />
-        <motion.div
-          className="absolute top-1/2 left-1/2 w-24 h-24 bg-blue-500/20 rounded-full blur-2xl"
-          animate={{
-            scale: [1, 1.5, 1],
-            opacity: [0.2, 0.6, 0.2],
-          }}
-          transition={{
-            duration: 6,
-            repeat: Infinity,
-            ease: "easeInOut",
-            delay: 2,
-          }}
-        />
+            <motion.div
+              className="absolute bottom-1/4 right-1/4 w-32 h-32 bg-purple-500/20 rounded-full blur-2xl"
+              animate={{
+                scale: [1.3, 1, 1.3],
+                opacity: [0.4, 0.8, 0.4],
+              }}
+              transition={{
+                duration: 4,
+                repeat: Infinity,
+                ease: "easeInOut",
+                delay: 1,
+              }}
+            />
+            <motion.div
+              className="absolute top-1/2 left-1/2 w-24 h-24 bg-blue-500/20 rounded-full blur-2xl"
+              animate={{
+                scale: [1, 1.5, 1],
+                opacity: [0.2, 0.6, 0.2],
+              }}
+              transition={{
+                duration: 6,
+                repeat: Infinity,
+                ease: "easeInOut",
+                delay: 2,
+              }}
+            />
+          </>
+        )}
       </div>
 
       <div className="container relative z-10 max-w-7xl mx-auto">
@@ -224,12 +248,12 @@ export default function Hero() {
             {/* Enhanced Stats */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
+              animate={prefersReducedMotion ? { opacity: 1, y: 0 } : { opacity: 1, y: 0 }}
               transition={{ delay: 1, duration: 0.6 }}
               className="grid grid-cols-3 gap-3 sm:gap-4 md:gap-6 lg:gap-8 pt-6 sm:pt-8 border-t border-border/50"
             >
               <motion.div
-                whileHover={{ scale: 1.05, y: -5 }}
+                whileHover={prefersReducedMotion ? {} : { scale: 1.05, y: -5 }}
                 className="text-center p-2 sm:p-3 md:p-4 bg-background/50 backdrop-blur-sm rounded-xl border border-border/50 hover:shadow-xl transition-all duration-300 cursor-pointer"
               >
                 <div className="text-lg sm:text-xl md:text-2xl font-bold text-primary">
@@ -240,7 +264,7 @@ export default function Hero() {
                 </div>
               </motion.div>
               <motion.div
-                whileHover={{ scale: 1.05, y: -5 }}
+                whileHover={prefersReducedMotion ? {} : { scale: 1.05, y: -5 }}
                 className="text-center p-2 sm:p-3 md:p-4 bg-background/50 backdrop-blur-sm rounded-xl border border-border/50 hover:shadow-xl transition-all duration-300 cursor-pointer"
               >
                 <div className="text-lg sm:text-xl md:text-2xl font-bold text-primary">
@@ -251,7 +275,7 @@ export default function Hero() {
                 </div>
               </motion.div>
               <motion.div
-                whileHover={{ scale: 1.05, y: -5 }}
+                whileHover={prefersReducedMotion ? {} : { scale: 1.05, y: -5 }}
                 className="text-center p-2 sm:p-3 md:p-4 bg-background/50 backdrop-blur-sm rounded-xl border border-border/50 hover:shadow-xl transition-all duration-300 cursor-pointer"
               >
                 <div className="text-lg sm:text-xl md:text-2xl font-bold text-primary">
@@ -369,47 +393,51 @@ export default function Hero() {
             </div>
 
             {/* Enhanced Floating elements */}
-            <motion.div
-              animate={{
-                y: [0, -10, 0],
-                rotate: [0, 10, 0],
-                scale: [1, 1.1, 1],
-              }}
-              transition={{
-                duration: 8,
-                repeat: Infinity,
-                ease: "easeInOut",
-              }}
-              className="absolute -top-2 sm:-top-4 -right-2 sm:-right-4 w-16 h-16 sm:w-24 sm:h-24 bg-gradient-to-br from-pink-400 to-purple-500 rounded-full opacity-20 blur-xl"
-            />
-            <motion.div
-              animate={{
-                y: [0, 10, 0],
-                rotate: [0, -10, 0],
-                scale: [1, 0.9, 1],
-              }}
-              transition={{
-                duration: 10,
-                repeat: Infinity,
-                ease: "easeInOut",
-                delay: 1,
-              }}
-              className="absolute -bottom-2 sm:-bottom-4 -left-2 sm:-left-4 w-14 h-14 sm:w-20 sm:h-20 bg-gradient-to-br from-blue-400 to-cyan-500 rounded-full opacity-20 blur-xl"
-            />
-            <motion.div
-              animate={{
-                x: [0, 8, 0],
-                y: [0, -3, 0],
-                opacity: [0.3, 0.7, 0.3],
-              }}
-              transition={{
-                duration: 6,
-                repeat: Infinity,
-                ease: "easeInOut",
-                delay: 2,
-              }}
-              className="absolute top-1/2 -right-4 sm:-right-8 w-8 h-8 sm:w-12 sm:h-12 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-full opacity-20 blur-lg"
-            />
+            {!prefersReducedMotion && (
+              <>
+                <motion.div
+                  animate={{
+                    y: [0, -10, 0],
+                    rotate: [0, 10, 0],
+                    scale: [1, 1.1, 1],
+                  }}
+                  transition={{
+                    duration: 8,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                  }}
+                  className="absolute -top-2 sm:-top-4 -right-2 sm:-right-4 w-16 h-16 sm:w-24 sm:h-24 bg-gradient-to-br from-pink-400 to-purple-500 rounded-full opacity-20 blur-xl"
+                />
+                <motion.div
+                  animate={{
+                    y: [0, 10, 0],
+                    rotate: [0, -10, 0],
+                    scale: [1, 0.9, 1],
+                  }}
+                  transition={{
+                    duration: 10,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                    delay: 1,
+                  }}
+                  className="absolute -bottom-2 sm:-bottom-4 -left-2 sm:-left-4 w-14 h-14 sm:w-20 sm:h-20 bg-gradient-to-br from-blue-400 to-cyan-500 rounded-full opacity-20 blur-xl"
+                />
+                <motion.div
+                  animate={{
+                    x: [0, 8, 0],
+                    y: [0, -3, 0],
+                    opacity: [0.3, 0.7, 0.3],
+                  }}
+                  transition={{
+                    duration: 6,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                    delay: 2,
+                  }}
+                  className="absolute top-1/2 -right-4 sm:-right-8 w-8 h-8 sm:w-12 sm:h-12 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-full opacity-20 blur-lg"
+                />
+              </>
+            )}
           </motion.div>
         </div>
 
