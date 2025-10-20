@@ -29,9 +29,10 @@ export default function FloatingParticles() {
 
   useFrame((state) => {
     if (ref.current) {
-      // Slower animation for better performance
-      ref.current.rotation.x = Math.sin(state.clock.elapsedTime * 0.05) * 0.05;
-      ref.current.rotation.y = Math.sin(state.clock.elapsedTime * 0.08) * 0.05;
+      // Even slower animation and use modulo for better performance
+      const time = state.clock.elapsedTime * 0.03;
+      ref.current.rotation.x = Math.sin(time) * 0.03;
+      ref.current.rotation.y = Math.sin(time * 1.3) * 0.03;
     }
   });
 

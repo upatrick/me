@@ -285,9 +285,15 @@ const Contact = memo(function Contact() {
                   <h3 className="text-xl font-semibold mb-2">
                     {t("contact.form.title")}
                   </h3>
-                  <p className="text-muted-foreground text-sm">
+                  <p className="text-muted-foreground text-sm mb-3">
                     {t("contact.form.description")}
                   </p>
+                  <div className="bg-gradient-to-r from-primary/10 to-purple-500/10 border border-primary/20 rounded-lg p-3">
+                    <p className="text-primary font-medium text-sm">
+                      💡 Faça uma avaliação gratuita do seu projeto! Conte-me sobre suas
+                      ideias e receba sugestões personalizadas.
+                    </p>
+                  </div>
                 </div>
 
                 <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">

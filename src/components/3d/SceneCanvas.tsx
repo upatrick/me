@@ -18,8 +18,23 @@ export default function SceneCanvas({ className }: SceneCanvasProps) {
     );
   }, []);
 
-  // Disable 3D scene entirely on mobile for better performance
-  if (isMobile) {
+  const isLowEndDevice = useMemo(() => {
+    // Use performance.now() to measure device capability more accurately
+    const startTime = performance.now();
+    // More comprehensive performance test
+    let result = 0;
+    for (let i = 0; i < 10000; i++) {
+      result += Math.sqrt(i) * Math.sin(i);
+    }
+    const endTime = performance.now();
+    const performanceScore = endTime - startTime;
+
+    // Consider device low-end if performance test takes > 5ms or is mobile
+    return performanceScore > 5 || isMobile;
+  }, [isMobile]);
+
+  // Disable 3D scene entirely on low-end devices for better performance
+  if (isLowEndDevice) {
     return <div className={className}></div>;
   }
 
