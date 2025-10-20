@@ -31,13 +31,14 @@ export default function SceneCanvas({ className }: SceneCanvasProps) {
           antialias: false,
           alpha: true,
           powerPreference: "high-performance",
+          stencil: false,
+          depth: true,
         }}
-        dpr={1}
+        dpr={Math.min(window.devicePixelRatio, 1.5)} // Limit DPR for performance
+        frameloop="demand" // Only render when needed
+        camera={{ position: [0, 0, 8], fov: 50 }}
       >
         <Suspense fallback={null}>
-          {/* Camera */}
-          <PerspectiveCamera makeDefault position={[0, 0, 8]} fov={50} />
-
           {/* Lighting */}
           <LightingRig />
 
@@ -45,16 +46,13 @@ export default function SceneCanvas({ className }: SceneCanvasProps) {
           <Hero3DObject />
           <FloatingParticles />
 
-          {/* Controls */}
-          <OrbitControls
+          {/* Controls - Disabled for performance */}
+          {/* <OrbitControls
             enablePan={false}
             enableZoom={false}
-            enableRotate={true}
+            enableRotate={false}
             autoRotate={false}
-            autoRotateSpeed={0.5}
-            maxPolarAngle={Math.PI / 2}
-            minPolarAngle={Math.PI / 2}
-          />
+          /> */}
         </Suspense>
       </Canvas>
     </div>

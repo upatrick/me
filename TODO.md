@@ -1,32 +1,30 @@
 # Performance Optimization TODO
 
-## 1. Optimize 3D Rendering
-- [x] Modify SceneCanvas.tsx to detect mobile and reduce DPR to 1, disable shadows/antialias, conditionally disable auto-rotation on mobile.
+## Completed
 
-## 2. Reduce Particle Count
-- [x] Update FloatingParticles.tsx to reduce particle count to 500 on mobile, 1000 on desktop.
+- [x] Analyze codebase and create optimization plan
+- [x] Get user approval for plan
+- [x] Install new dependencies (@vitejs/plugin-pwa, i18next-http-backend, lodash)
+- [x] Update vite.config.js for PWA plugin
+- [x] Update src/i18n/config.ts for lazy translations
+- [x] Update src/pages/Home.tsx for lazy component loading
+- [x] Update src/components/Hero.tsx with React.memo
+- [x] Update src/components/Contact.tsx with debouncing and React.memo
+- [x] Update src/components/Projects.tsx with React.memo
+- [x] Add font optimization in SEO.tsx
+- [x] Create useIntersectionObserver hook
+- [x] Create useWebVitals hook
+- [x] Optimize Projects component with intersection observer
+- [x] Add web vitals tracking to App.tsx
+- [x] Install web-vitals dependency
 
-## 3. Update Hero Component
-- [x] Add mobile detection in Hero.tsx, reduce floating particles to 10-15 on mobile, memoize particle generation.
+## Completed
 
-## 4. Lazy Load Heavy Components
-- [x] Wrap 3D components in React.lazy in App.tsx or relevant files.
+- [x] Optimize Three.js components for better performance
+- [x] Fix SEO noscript error
+- [x] Test performance improvements with Lighthouse
 
-## 5. Respect Reduced Motion
-- [x] Add prefers-reduced-motion support to disable animations in Hero.tsx and other components.
+## Pending
 
-## 6. Optimize Animations
-- [x] Use will-change CSS, reduce complexity, use intersection observer for viewport animations.
-
-## 7. Add Performance Monitoring
-- [x] Integrate simple FPS counter or use React DevTools Profiler in dev mode.
-
-## 8. Optimize Images and Assets
-- [x] Implement service worker for caching static assets.
-- [x] Add web app manifest for PWA features.
-
-## 9. Implement Code Splitting
-- [x] Configure Vite build to split vendor chunks (Three.js, animations, UI libs).
-
-## 10. Add Service Worker for Caching
-- [x] Create service worker to cache assets and improve load times.
+- [ ] Image optimization (if images added later)
+- [ ] Final bundle size check

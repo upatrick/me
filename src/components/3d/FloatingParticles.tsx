@@ -13,15 +13,15 @@ export default function FloatingParticles() {
     );
   }, []);
 
-  const particlesCount = isMobile ? 100 : 500;
+  const particlesCount = isMobile ? 20 : 50; // Reduced count
 
   const positions = useMemo(() => {
     const positions = new Float32Array(particlesCount * 3);
 
     for (let i = 0; i < particlesCount; i++) {
-      positions[i * 3] = (Math.random() - 0.5) * 20;
-      positions[i * 3 + 1] = (Math.random() - 0.5) * 20;
-      positions[i * 3 + 2] = (Math.random() - 0.5) * 20;
+      positions[i * 3] = (Math.random() - 0.5) * 15; // Smaller spread
+      positions[i * 3 + 1] = (Math.random() - 0.5) * 15;
+      positions[i * 3 + 2] = (Math.random() - 0.5) * 15;
     }
 
     return positions;
@@ -29,20 +29,21 @@ export default function FloatingParticles() {
 
   useFrame((state) => {
     if (ref.current) {
-      ref.current.rotation.x = Math.sin(state.clock.elapsedTime * 0.1) * 0.1;
-      ref.current.rotation.y = Math.sin(state.clock.elapsedTime * 0.15) * 0.1;
+      // Slower animation for better performance
+      ref.current.rotation.x = Math.sin(state.clock.elapsedTime * 0.05) * 0.05;
+      ref.current.rotation.y = Math.sin(state.clock.elapsedTime * 0.08) * 0.05;
     }
   });
 
   return (
-    <Points ref={ref} positions={positions} stride={3} frustumCulled={false}>
+    <Points ref={ref} positions={positions} stride={3} frustumCulled={true}>
       <PointMaterial
         transparent
         color="#8b5cf6"
-        size={0.02}
+        size={0.015} // Smaller size
         sizeAttenuation={true}
         depthWrite={false}
-        opacity={0.6}
+        opacity={0.4} // Lower opacity
       />
     </Points>
   );

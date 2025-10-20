@@ -7,6 +7,7 @@ import SEO from "./components/SEO";
 import Analytics from "./components/Analytics";
 import LoadingSpinner from "./components/LoadingSpinner";
 import ErrorFallback from "./components/ErrorFallback";
+import { useWebVitals } from "./hooks/useWebVitals";
 
 // Lazy load pages for code splitting
 const Home = lazy(() => import("./pages/Home"));
@@ -18,6 +19,8 @@ const Hero3DObject = lazy(() => import("./components/3d/Hero3DObject"));
 const LightingRig = lazy(() => import("./components/3d/LightingRig"));
 
 export default function App() {
+  useWebVitals();
+
   return (
     <ErrorBoundary FallbackComponent={ErrorFallback}>
       <HelmetProvider>

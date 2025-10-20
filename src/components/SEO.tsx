@@ -14,7 +14,7 @@ interface SEOProps {
 
 export default function SEO({
   title = "Patrick Dutra - Desenvolvedor Fullstack",
-  description = "Desenvolvedor fullstack focado em criar experiências digitais excepcionais. Especialista em React, TypeScript, Three.js e design moderno.",
+  description = "Desenvolvedor fullstack focado em desenvolvimento fullstack para criar experiências elegantes que fazem a diferença. Especialista em React, TypeScript, Three.js e design moderno.",
   image = "/sparkles-gradient.svg",
   url = "https://patrickdutra.com",
   type = "website",
@@ -35,6 +35,23 @@ export default function SEO({
 
   return (
     <Helmet>
+      {/* Preload critical resources */}
+      <link rel="preload" href="/sparkles-gradient.svg" as="image" />
+      <link rel="dns-prefetch" href="//fonts.googleapis.com" />
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+      <link
+        rel="preload"
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+        as="style"
+        onload="this.onload=null;this.rel='stylesheet'"
+      />
+      <noscript>{`
+        <link
+          rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+        />
+      `}</noscript>
+
       {/* Basic meta tags */}
       <title>{title}</title>
       <meta name="description" content={description} />

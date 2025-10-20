@@ -1,12 +1,16 @@
-import React from "react";
+import React, { memo } from "react";
 import { motion } from "framer-motion";
 import { Sparkles, Code, Zap, Loader } from "lucide-react";
 import { useTranslation } from "react-i18next";
+import { useIntersectionObserver } from "../hooks/useIntersectionObserver";
 
-export default function Projects() {
+const Projects = memo(function Projects() {
   const { t } = useTranslation();
+  const { ref, hasIntersected } = useIntersectionObserver({ threshold: 0.1 });
+
   return (
     <section
+      ref={ref}
       id="projects"
       className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-background via-background/50 to-primary/5"
     >
@@ -15,58 +19,63 @@ export default function Projects() {
         {/* Blur Background */}
         <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-purple-500/5 to-blue-500/10 blur-3xl" />
 
-        {/* Floating Particles */}
-        {[...Array(10)].map((_, i) => (
-          <motion.div
-            key={i}
-            className="absolute w-1 h-1 bg-primary/30 rounded-full"
-            initial={{
-              x: Math.random() * window.innerWidth,
-              y: Math.random() * window.innerHeight,
-              opacity: 0,
-            }}
-            animate={{
-              y: [null, -20, 20],
-              opacity: [0, 1, 0],
-            }}
-            transition={{
-              duration: 3 + Math.random() * 2,
-              repeat: Infinity,
-              delay: Math.random() * 2,
-            }}
-            style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-            }}
-          />
-        ))}
+        {/* Floating Particles - Only animate when visible */}
+        {hasIntersected &&
+          [...Array(6)].map((_, i) => (
+            <motion.div
+              key={i}
+              className="absolute w-1 h-1 bg-primary/30 rounded-full"
+              initial={{
+                x: Math.random() * window.innerWidth,
+                y: Math.random() * window.innerHeight,
+                opacity: 0,
+              }}
+              animate={{
+                y: [null, -20, 20],
+                opacity: [0, 1, 0],
+              }}
+              transition={{
+                duration: 3 + Math.random() * 2,
+                repeat: Infinity,
+                delay: Math.random() * 2,
+              }}
+              style={{
+                left: `${Math.random() * 100}%`,
+                top: `${Math.random() * 100}%`,
+              }}
+            />
+          ))}
 
-        {/* Neon Glow Effects */}
-        <motion.div
-          className="absolute top-1/4 left-1/4 w-32 h-32 bg-primary/20 rounded-full blur-xl"
-          animate={{
-            scale: [1, 1.2, 1],
-            opacity: [0.3, 0.6, 0.3],
-          }}
-          transition={{
-            duration: 4,
-            repeat: Infinity,
-            ease: "easeInOut",
-          }}
-        />
-        <motion.div
-          className="absolute bottom-1/4 right-1/4 w-24 h-24 bg-purple-500/20 rounded-full blur-xl"
-          animate={{
-            scale: [1.2, 1, 1.2],
-            opacity: [0.4, 0.7, 0.4],
-          }}
-          transition={{
-            duration: 3,
-            repeat: Infinity,
-            ease: "easeInOut",
-            delay: 1,
-          }}
-        />
+        {/* Neon Glow Effects - Only animate when visible */}
+        {hasIntersected && (
+          <>
+            <motion.div
+              className="absolute top-1/4 left-1/4 w-32 h-32 bg-primary/20 rounded-full blur-xl"
+              animate={{
+                scale: [1, 1.2, 1],
+                opacity: [0.3, 0.6, 0.3],
+              }}
+              transition={{
+                duration: 4,
+                repeat: Infinity,
+                ease: "easeInOut",
+              }}
+            />
+            <motion.div
+              className="absolute bottom-1/4 right-1/4 w-24 h-24 bg-purple-500/20 rounded-full blur-xl"
+              animate={{
+                scale: [1.2, 1, 1.2],
+                opacity: [0.4, 0.7, 0.4],
+              }}
+              transition={{
+                duration: 3,
+                repeat: Infinity,
+                ease: "easeInOut",
+                delay: 1,
+              }}
+            />
+          </>
+        )}
       </div>
 
       {/* Main Content */}
@@ -201,45 +210,53 @@ export default function Projects() {
         </motion.div>
       </div>
 
-      {/* Additional Floating Elements */}
-      <motion.div
-        className="absolute top-20 left-10 w-2 h-2 bg-primary/50 rounded-full"
-        animate={{
-          y: [0, -10, 0],
-          opacity: [0.5, 1, 0.5],
-        }}
-        transition={{
-          duration: 3,
-          repeat: Infinity,
-          ease: "easeInOut",
-        }}
-      />
-      <motion.div
-        className="absolute bottom-20 right-10 w-3 h-3 bg-purple-500/50 rounded-full"
-        animate={{
-          y: [0, 10, 0],
-          opacity: [0.3, 0.8, 0.3],
-        }}
-        transition={{
-          duration: 4,
-          repeat: Infinity,
-          ease: "easeInOut",
-          delay: 1,
-        }}
-      />
-      <motion.div
-        className="absolute top-1/2 right-20 w-1 h-1 bg-blue-500/50 rounded-full"
-        animate={{
-          x: [0, 5, 0],
-          opacity: [0.4, 1, 0.4],
-        }}
-        transition={{
-          duration: 2.5,
-          repeat: Infinity,
-          ease: "easeInOut",
-          delay: 0.5,
-        }}
-      />
+      {/* Additional Floating Elements - Only animate when visible */}
+      {hasIntersected && (
+        <>
+          <motion.div
+            className="absolute top-20 left-10 w-2 h-2 bg-primary/50 rounded-full"
+            animate={{
+              y: [0, -10, 0],
+              opacity: [0.5, 1, 0.5],
+            }}
+            transition={{
+              duration: 3,
+              repeat: Infinity,
+              ease: "easeInOut",
+            }}
+          />
+          <motion.div
+            className="absolute bottom-20 right-10 w-3 h-3 bg-purple-500/50 rounded-full"
+            animate={{
+              y: [0, 10, 0],
+              opacity: [0.3, 0.8, 0.3],
+            }}
+            transition={{
+              duration: 4,
+              repeat: Infinity,
+              ease: "easeInOut",
+              delay: 1,
+            }}
+          />
+          <motion.div
+            className="absolute top-1/2 right-20 w-1 h-1 bg-blue-500/50 rounded-full"
+            animate={{
+              x: [0, 5, 0],
+              opacity: [0.4, 1, 0.4],
+            }}
+            transition={{
+              duration: 2.5,
+              repeat: Infinity,
+              ease: "easeInOut",
+              delay: 0.5,
+            }}
+          />
+        </>
+      )}
     </section>
   );
-}
+});
+
+Projects.displayName = "Projects";
+
+export default Projects;

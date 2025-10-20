@@ -1,10 +1,11 @@
-import React from "react";
+import React, { memo, useCallback } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { motion } from "framer-motion";
 import emailjs from "@emailjs/browser";
 import { useTranslation } from "react-i18next";
+import debounce from "lodash/debounce";
 import {
   Mail,
   MapPin,
@@ -52,7 +53,7 @@ const createContactSchema = (t: any) =>
     message: z.string().min(10, t("contact.form.errors.messageMin")),
   });
 
-export default function Contact() {
+const Contact = memo(function Contact() {
   const { t } = useTranslation();
 
   const contactInfo = [
@@ -96,31 +97,41 @@ export default function Contact() {
     resolver: zodResolver(createContactSchema(t)),
   });
 
-  const onSubmit = async (data: ContactFormData) => {
-    try {
-      // EmailJS configuration - You'll need to set these up in your EmailJS account
-      const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID || "portifolio";
-      const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID || "template_9kqqsrr";
-      const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY || "dPEKVzDCRLHr-q38D";
+  const debouncedSubmit = useCallback(
+    debounce(async (data: ContactFormData) => {
+      try {
+        // EmailJS configuration - You'll need to set these up in your EmailJS account
+        const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID || "portifolio";
+        const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID || "template_9kqqsrr";
+        const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY || "dPEKVzDCRLHr-q38D";
 
-      const templateParams = {
-        from_name: data.name,
-        from_email: data.email,
-        reply_to: data.email,
-        subject: data.subject,
-        message: data.message,
-        to_name: "Patrick Dutra",
-      };
+        const templateParams = {
+          from_name: data.name,
+          from_email: data.email,
+          reply_to: data.email,
+          subject: data.subject,
+          message: data.message,
+          to_name: "Patrick Dutra",
+        };
 
-      await emailjs.send(serviceId, templateId, templateParams, publicKey);
+        await emailjs.send(serviceId, templateId, templateParams, publicKey);
 
-      // Reset form after successful submission
-      reset();
-    } catch (error) {
-      console.error("EmailJS error:", error);
-      throw new Error("Falha ao enviar mensagem. Tente novamente.");
-    }
-  };
+        // Reset form after successful submission
+        reset();
+      } catch (error) {
+        console.error("EmailJS error:", error);
+        throw new Error("Falha ao enviar mensagem. Tente novamente.");
+      }
+    }, 500), // 500ms debounce
+    [reset]
+  );
+
+  const onSubmit = useCallback(
+    (data: ContactFormData) => {
+      debouncedSubmit(data);
+    },
+    [debouncedSubmit]
+  );
 
   return (
     <section
@@ -415,4 +426,8 @@ export default function Contact() {
       </div>
     </section>
   );
-}
+});
+
+Contact.displayName = "Contact";
+
+export default Contact;

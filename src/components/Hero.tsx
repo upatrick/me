@@ -1,4 +1,4 @@
-import React, { useMemo, useCallback } from "react";
+import React, { useMemo, useCallback, memo } from "react";
 import { motion } from "framer-motion";
 import {
   ArrowDown,
@@ -17,7 +17,7 @@ import { useTranslation } from "react-i18next";
 import { Button } from "./ui/button";
 import SceneCanvas from "./3d/SceneCanvas";
 
-export default function Hero() {
+const Hero = memo(function Hero() {
   const { t } = useTranslation();
 
   const isMobile = useMemo(() => {
@@ -51,7 +51,7 @@ export default function Hero() {
   return (
     <section
       id="hero"
-      className="min-h-screen flex items-center justify-center relative overflow-hidden px-4 sm:px-6 lg:px-8 pt-24 sm:pt-28 md:pt-32 lg:pt-0 lg:-mt-20"
+      className="min-h-screen flex items-center justify-center relative overflow-hidden px-4 sm:px-6 lg:px-8 pt-24 sm:pt-28 md:pt-32 lg:pt-0 lg:-mt-16"
     >
       {/* 3D Background */}
       <div className="absolute inset-0">
@@ -463,4 +463,8 @@ export default function Hero() {
       </div>
     </section>
   );
-}
+});
+
+Hero.displayName = "Hero";
+
+export default Hero;
